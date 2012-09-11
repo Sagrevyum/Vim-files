@@ -62,7 +62,7 @@ nmap <leader>w :wall!<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Editing position aid
 set number
-set numberwidth=1
+set numberwidth=4
 set ruler
 set cul
 set showmatch	
