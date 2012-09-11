@@ -89,8 +89,8 @@ set novisualbell
 set noerrorbells
 set t_vb=
 
-colorscheme megara
 syntax on
+colorscheme megara
 set t_Co=256        " 256 color term 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -114,8 +114,6 @@ autocmd BufReadPost *
 
 " Remember info about open buffers on close
 set viminfo^=%
-
-augroup END
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " -> Editing [EDT]
