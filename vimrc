@@ -137,8 +137,16 @@ set wrap
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "-> Autocmds and lang specific [AUT]
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Set Ruby to 2-space indent
-autocmd WinEnter,FileType   ruby  set sts=2 ts=2 sw=2
+autocmd!
+
+" Set [...] to 2-space indent
+autocmd WinEnter,FileType ruby,haml,eruby,yaml,html,javascript,sass,cucumber set sts=2 ts=2 sw=2 
+
+" Text -> Git, Asciidoc
+autocmd FileType text setlocal textwidth=80
+
+" Set SASS to SASS. Duh
+autocmd! BufRead,BufNewFile *.sass setfiletype sass 
 
 " Delete trailing white space on save, useful for Python and CoffeeScript ;)
 func! DeleteTrailingWS()
