@@ -6,21 +6,14 @@
 "    -> General [GEN]
 "    -> Keymaps [KEY]
 "    -> Vim UI [VUI]
-"    -> Files and backups [FIL]
+"    -> Files [FIL]
 "    -> Editing [EDT]
-"    == Done, supposedly ===============
-"
-"    -> Visual mode related [VIS]
-"    -> Moving around, tabs and buffers [VIW]
-"    -> Status line [STA]
-"
-"    -> Editing mappings []
-"    -> vimgrep searching and cope displaying []
-"    -> Spell checking []
-"    -> Misc []
-"    -> Helper functions []
+"    -> Autocmds and lang specific [AUT]
+"    -> Helpers [HLP]
 " References: 
 "    -> Amix vimrc [http://amix.dk/vim/vimrc.html]
+"    -> VimCasts [http://vimcasts.org]
+"    -> Gary Berhardt [https://github.com/garybernhardt/dotfiles/blob/master/.vimrc]
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " -> General [GEN]
@@ -42,20 +35,24 @@ set hidden
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " -> Keymaps [KEY]
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" use . as :
+" Use . as :
 nore . :
-
-" Key Mappings
 let mapleader = ","
+
+" Buffer keymaps
 map <Leader>bn :bnext<cr>
 map <Leader>bN :bprevious<cr>
 map <Leader>bd :bdelete<cr>
 
-" Smart way to move between windows
+" Window keymaps
 map <C-j> <C-W>j
 map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
+
+" Tab keymaps
+map <leader>tn :tabnew<cr>
+map <leader>tc :tabclose<cr>
 
 " Giga save. Handle with care
 nmap <leader>w :wall!<cr>
@@ -65,6 +62,7 @@ nmap <leader>w :wall!<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Editing position aid
 set number
+set numberwidth=1
 set ruler
 set cul
 set showmatch	
@@ -107,15 +105,20 @@ set noswapfile
 filetype plugin indent on
 augroup vimrcEx
 au!
+
+" Return to last edit position
 autocmd BufReadPost *
-\ if line("'\"") > 1 && line("'\"") <= line("$") |
-\   exe "normal! g`\"" |
-\ endif
+     \ if line("'\"") > 1 && line("'\"") <= line("$") |
+     \   exe "normal! g`\"" |
+     \ endif
+
+" Remember info about open buffers on close
+set viminfo^=%
 
 augroup END
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"-> Editing
+" -> Editing [EDT]
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Use 4-space tabs
 set softtabstop=4
@@ -131,13 +134,52 @@ set autoindent
 set smartindent
 set wrap
 
-"--------------------------------------------------------------------------
-"- Previous Vimrc (Dirty) -------------------------------------------------
-"--------------------------------------------------------------------------
-
-
-
-" Editor typing settings
-
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"-> Autocmds and lang specific [AUT]
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Set Ruby to 2-space indent
 autocmd WinEnter,FileType   ruby  set sts=2 ts=2 sw=2
 
+" Delete trailing white space on save, useful for Python and CoffeeScript ;)
+func! DeleteTrailingWS()
+  exe "normal mz"
+  %s/\s\+$//ge
+    exe "normal `z"
+endfunc
+
+autocmd BufWrite *.py :call DeleteTrailingWS()
+autocmd BufWrite *.coffee :call DeleteTrailingWS()
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"-> Helpers [HLP]
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Don't close window, when deleting a buffer
+" By Amix
+command! Bclose call <SID>BufcloseCloseIt()
+function! <SID>BufcloseCloseIt()
+    let l:currentBufNum = bufnr("%")
+    let l:alternateBufNum = bufnr("#")
+
+    if buflisted(l:alternateBufNum)
+        buffer #
+    else
+        bnext
+    endif
+    if bufnr("%") == l:currentBufNum
+        new
+    endif
+
+    if buflisted(l:currentBufNum)
+        execute("bdelete! ".l:currentBufNum)
+    endif
+endfunction
+
+" Show syntax highlighting groups for word under cursor
+" By VimCasts
+nmap <leader>p :call <SID>SynStack()<CR>
+function! <SID>SynStack()
+    if !exists("*synstack")
+        return
+    endif
+    echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfunc
