@@ -10,6 +10,7 @@
 "    -> Editing [EDT]
 "    -> Autocmds and lang specific [AUT]
 "    -> Helpers [HLP]
+"    -> Plugin configuration [PGC]
 " References: 
 "    -> Amix vimrc [http://amix.dk/vim/vimrc.html]
 "    -> VimCasts [http://vimcasts.org]
@@ -35,6 +36,9 @@ set hidden
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " -> Keymaps [KEY]
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""
+" Vim keymaps
+""""""""""""""
 " Use . as :
 nore . :
 let mapleader = ","
@@ -55,7 +59,13 @@ map <leader>tn :tabnew<cr>
 map <leader>tc :tabclose<cr>
 
 " Giga save. Handle with care
-nmap <leader>w :wall!<cr>
+nmap <leader>ww :wall!<cr>
+nmap <leader>wq :wqall!<cr>
+
+"""""""""""""""""
+" Plugin keymaps
+"""""""""""""""""
+nmap <leader>nt :NERDTreeToggle<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " -> Vim UI [VUI]
@@ -159,27 +169,6 @@ autocmd BufWrite *.coffee :call DeleteTrailingWS()
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "-> Helpers [HLP]
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Don't close window, when deleting a buffer
-" By Amix
-command! Bclose call <SID>BufcloseCloseIt()
-function! <SID>BufcloseCloseIt()
-    let l:currentBufNum = bufnr("%")
-    let l:alternateBufNum = bufnr("#")
-
-    if buflisted(l:alternateBufNum)
-        buffer #
-    else
-        bnext
-    endif
-    if bufnr("%") == l:currentBufNum
-        new
-    endif
-
-    if buflisted(l:currentBufNum)
-        execute("bdelete! ".l:currentBufNum)
-    endif
-endfunction
-
 " Show syntax highlighting groups for word under cursor
 " By VimCasts
 nmap <leader>p :call <SID>SynStack()<CR>
@@ -189,3 +178,8 @@ function! <SID>SynStack()
     endif
     echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfunc
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" -> Plugin configuration [PGC]
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
