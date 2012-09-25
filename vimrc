@@ -45,6 +45,9 @@ set hidden
 nore . :
 let mapleader = ","
 
+" Paste from the clipboard without indenting
+set pastetoggle=<Leader>p
+
 " Buffer keymaps
 map <Leader>bn :bnext<cr>
 map <Leader>bN :bprevious<cr>
@@ -67,7 +70,18 @@ nmap <leader>wq :wqall!<cr>
 """""""""""""""""
 " Plugin keymaps
 """""""""""""""""
+""""""""""
+" NERDTree
+""""""""""
 nmap <leader>nt :NERDTreeToggle<cr>
+
+""""""""""""""""""""
+" Commentary keymaps
+""""""""""""""""""""
+xmap <Leader>c  <Plug>Commentary
+nmap <Leader>c  <Plug>Commentary
+nmap <Leader>cc <Plug>CommentaryLine
+nmap <Leader>cu <Plug>CommentaryUndo
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " -> Vim UI [VUI]
@@ -144,9 +158,6 @@ set autoindent
 set smartindent
 set wrap
 
-" Paste from the clipboard without indenting
-set pastetoggle=<C-p>
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "-> Autocmds and lang specific [AUT]
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -179,7 +190,7 @@ autocmd BufWrite *.coffee :call DeleteTrailingWS()
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Show syntax highlighting groups for word under cursor
 " By VimCasts
-nmap <leader>p :call <SID>SynStack()<CR>
+nmap <leader>s :call <SID>SynStack()<CR>
 function! <SID>SynStack()
     if !exists("*synstack")
         return
@@ -197,11 +208,3 @@ endfunc
 autocmd vimenter * if !argc() | NERDTree | endif
 " Close vim if the only window left open is a NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-
-""""""""""""""""""""
-" Commentary keymaps
-""""""""""""""""""""
-xmap <Leader>c  <Plug>Commentary
-nmap <Leader>c  <Plug>Commentary
-nmap <Leader>cc <Plug>CommentaryLine
-nmap <Leader>cu <Plug>CommentaryUndo
