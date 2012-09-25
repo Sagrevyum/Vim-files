@@ -135,6 +135,9 @@ set nobackup
 set nowb
 set noswapfile
 
+" Blowfish encryption
+setlocal cryptmethod=blowfish
+
 " Filetypes
 filetype plugin indent on
 augroup vimrcEx
