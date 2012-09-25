@@ -15,6 +15,8 @@
 "    -> Amix vimrc [http://amix.dk/vim/vimrc.html]
 "    -> VimCasts [http://vimcasts.org]
 "    -> Gary Berhardt [https://github.com/garybernhardt/dotfiles/blob/master/.vimrc]
+"    -> The authors of the plugins. To be stated in my next commit, in the
+"       readme file of Github
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " -> General [GEN]
@@ -156,6 +158,9 @@ autocmd FileType text setlocal textwidth=80
 " Set SASS to SASS. Duh
 autocmd! BufRead,BufNewFile *.sass setfiletype sass 
 
+" Don't change tabs for spaces in Makefiles
+autocmd FileType make setlocal noexpandtab
+
 " Delete trailing white space on save, useful for Python and CoffeeScript ;)
 func! DeleteTrailingWS()
   exe "normal mz"
@@ -182,4 +187,18 @@ endfunc
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " -> Plugin configuration [PGC]
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""
+" NERDTree
+""""""""""
+" Open NERDTree if no files were specified
+autocmd vimenter * if !argc() | NERDTree | endif
+" Close vim if the only window left open is a NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+
+""""""""""""""""""""
+" Commentary keymaps
+""""""""""""""""""""
+xmap <Leader>c  <Plug>Commentary
+nmap <Leader>c  <Plug>Commentary
+nmap <Leader>cc <Plug>CommentaryLine
+nmap <Leader>cu <Plug>CommentaryUndo
