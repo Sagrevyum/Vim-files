@@ -63,6 +63,9 @@ map <C-l> <C-W>l
 map <leader>tn :tabnew<cr>
 map <leader>tc :tabclose<cr>
 
+" Dismiss search highlight
+nmap <Space> :nohl<cr>
+
 " Giga save. Handle with care
 nmap <leader>ww :wall!<cr>
 nmap <leader>wq :wqall!<cr>
@@ -103,6 +106,7 @@ set cmdheight=1
 " Search options
 set ignorecase
 set smartcase
+set hlsearch
 set incsearch		" Real time match
 set magic           " Regex magic
 
