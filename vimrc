@@ -144,6 +144,9 @@ set autoindent
 set smartindent
 set wrap
 
+" Paste from the clipboard without indenting
+set pastetoggle=<C-p>
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "-> Autocmds and lang specific [AUT]
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
