@@ -45,6 +45,8 @@ set undolevels=1000
 """"""""""""""
 " Vim keymaps
 """"""""""""""
+" Use spacebar to repeat last command
+nore <Space> .
 " Use . as :
 nore . :
 let mapleader = ","
@@ -68,7 +70,7 @@ map <leader>tn :tabnew<cr>
 map <leader>tc :tabclose<cr>
 
 " Dismiss search highlight
-nmap <Space> :nohl<cr>
+nmap <Leader><Space> :nohl<cr>
 
 " Giga save. Handle with care
 nmap <leader>ww :wall!<cr>
