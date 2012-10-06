@@ -36,8 +36,8 @@ set encoding=utf-8
 set hidden
 
 " Remember stuff
-set history=1000
-set undolevels=1000
+set history=256
+set undolevels=512
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " -> Keymaps [KEY]
@@ -92,6 +92,10 @@ nmap <Leader>c  <Plug>Commentary
 nmap <Leader>cc <Plug>CommentaryLine
 nmap <Leader>cu <Plug>CommentaryUndo
 
+"""""""""
+" Switch
+"""""""""
+nnoremap - :Switch<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " -> Vim UI [VUI]
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
