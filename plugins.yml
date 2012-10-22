@@ -1,0 +1,30 @@
+# Put all the Git repos of the plugins to be cloned here
+# Format: <repo-name>: <url>
+plugin-list:
+  commentary: https://github.com/tpope/vim-commentary.git
+  matchit: https://github.com/tsaleh/vim-matchit.git
+  minibufexpl: https://github.com/fholgado/minibufexpl.vim.git
+  nerdtree: https://github.com/scrooloose/nerdtree.git
+  powerline: https://github.com/Lokaltog/vim-powerline.git
+  rails: https://github.com/tpope/vim-rails.git
+  snipmate-snippets: https://github.com/honza/snipmate-snippets.git
+  snipmate: https://github.com/msanders/snipmate.vim.git
+  switch: https://github.com/AndrewRadev/switch.vim.git
+  tasklist: https://github.com/vim-scripts/TaskList.vim.git
+  zencoding: https://github.com/mattn/zencoding-vim.git
+  ctrlp: https://github.com/kien/ctrlp.vim.git
+
+# libraries:
+  tlib_vim: https://github.com/vim-scripts/tlib.git
+  vim-addon-mw-utils: https://github.com/MarcWeber/vim-addon-mw-utils.git
+
+# syntax-list:
+  coffee-script: https://github.com/kchmck/vim-coffee-script.git
+  css3: https://github.com/hail2u/vim-css3-syntax.git
+  haml: https://github.com/tpope/vim-haml.git
+  ruby-sinatra: https://github.com/hallison/vim-ruby-sinatra.git
+  scss: https://github.com/cakebaker/scss-syntax.vim.git
+
+# colorschemes:
+  megara: https://github.com/Heldraug/vim-megara.git
+  vividchalk: https://github.com/tpope/vim-vividchalk
