@@ -54,6 +54,13 @@ let mapleader = ","
 " Paste from the clipboard without indenting
 set pastetoggle=<Leader>p
 
+" Navigation keymaps
+" Power navigation, by Andrew Radev
+nmap J 5j
+nmap K 5k
+xmap J 5j
+xmap K 5k
+
 " Buffer keymaps
 map <Leader>bn :bnext<cr>
 map <Leader>bN :bprevious<cr>
@@ -75,6 +82,7 @@ nmap <Leader><Space> :nohl<cr>
 " Giga save. Handle with care
 nmap <leader>ww :wall!<cr>
 nmap <leader>wq :wqall!<cr>
+nmap <leader>qq :qall!<cr>
 
 """""""""""""""""
 " Plugin keymaps
@@ -189,6 +197,10 @@ autocmd FileType text setlocal textwidth=80
 " Set SASS to SASS. Duh
 autocmd! BufRead,BufNewFile *.sass setfiletype sass 
 
+" Set F# lex to F#
+autocmd! BufRead,BufNewFile *.fsl setfiletype fsharp 
+autocmd! BufRead,BufNewFile *.fsy setfiletype fsharp 
+
 " Don't change tabs for spaces in Makefiles
 autocmd FileType make setlocal noexpandtab
 
@@ -227,3 +239,9 @@ autocmd vimenter * if !argc() | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 " Close NERDTree after opening a file
 let NERDTreeQuitOnOpen=1
+
+""""""""""
+" CtrlP
+""""""""""
+" When opening multiple files, open them in the background
+let g:ctrlp_open_multiple_files = 'i'
