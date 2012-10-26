@@ -153,7 +153,9 @@ set noswapfile
 setlocal cryptmethod=blowfish
 
 " Filetypes
-filetype plugin indent on
+filetype plugin on
+filetype indent on
+set omnifunc=syntaxcomplete#Complete
 augroup vimrcEx
 au!
 
