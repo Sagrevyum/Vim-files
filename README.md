@@ -11,7 +11,7 @@ Amix .vimrc
 
 For a fresh install in a new machine:
 
-    git clone https://github.com/Heldraug/Vimfiles.git
+    git clone https://github.com/Heldraug/Vim-files.git .vim
     ln -s ~/.vim/vimrc ~/.vimrc
     git submodule init
     git submodule update
